@@ -1,0 +1,87 @@
+# Unity Git Configuration
+# Source: Unity 6 LTS / GitLab & GitHub Standard Unity .gitignore
+
+# --------------------------------------------------
+# Unity generated folders (NEVER COMMIT)
+# --------------------------------------------------
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]serSettings/
+/[Mm]emoryCaptures/
+/[Aa]sync/[Tt]mp/
+
+# --------------------------------------------------
+# Package resolution lockfile - Unity silently rewrites this on nearly every
+# project open as it re-resolves transitive package versions, which is pure
+# diff noise for ~100 first-time Git users. manifest.json alone is enough to
+# resolve packages; let each machine regenerate its own lockfile.
+# --------------------------------------------------
+/Packages/packages-lock.json
+
+# --------------------------------------------------
+# Asset Store tools & packages cache
+# --------------------------------------------------
+/[Aa]ssetStoreTools*
+/[Aa]ssets/[Aa]ssetStoreTools*
+
+# --------------------------------------------------
+# Visual Studio / Visual Studio Code / Rider
+# --------------------------------------------------
+.vs/
+.idea/
+.vscode/
+*.csproj
+*.unityproj
+*.sln
+*.slnx
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.pdb.meta
+*.opendb
+*.VC.db
+
+# Unity profiler & reports
+sysinfo.txt
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# --------------------------------------------------
+# OS Generated Files
+# --------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# --------------------------------------------------
+# Builds & Executables
+# --------------------------------------------------
+*.apk
+*.aab
+*.unitypackage
+*.app/
+*.exe
+
+# --------------------------------------------------
+# Crashlytics & Analytics
+# --------------------------------------------------
+crashlytics-build.properties
+
+# --------------------------------------------------
+# CRITICAL: Always track .meta files
+# --------------------------------------------------
+!*.meta
