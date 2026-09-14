@@ -21,6 +21,8 @@ public class Spawner : MonoBehaviour
 
     // TODO: add your own field(s) for WHERE new instances appear - a fixed point
     // relative to this transform, or a random position within some bounds. Your choice.
+    private Transform spawnPoint;
+    [SerializeField] GameObject activationTrigger;
 
     [Header("Activation")]
     [Tooltip("Whether the Spawner is currently instantiating. Toggle this at runtime " +
@@ -44,19 +46,49 @@ public class Spawner : MonoBehaviour
         // Toggling isActive alone doesn't finish the requirement below - the
         // timer and spawning logic still need to actually respect it.
 
+
+
         // TODO: only accumulate Time.deltaTime into `timer` while `isActive` is
         // true. When inactive, leave `timer` exactly where it was (don't reset
         // it to 0 - resuming should continue counting, not restart the interval).
+
+        if (isActive) { timer += Time.deltaTime; }
 
         // TODO: once `timer` reaches `spawnInterval` AND spawnedObjects.Count is
         // below `maxActiveObjects`, instantiate `prefabToSpawn` at a position of
         // your choosing, add the new GameObject to `spawnedObjects`, and reset
         // `timer` back to 0. Don't call Instantiate() unconditionally every frame,
         // and don't spawn past the capacity limit even if the timer is ready.
+        if (timer == spawnInterval && spawnedObjects.Count < maxActiveObjects)
+        {
+            if (isActive)
+            {
+                SpawnObject();
+            }
+        }
+
 
         // TODO: periodically remove destroyed (null) entries from `spawnedObjects`
         // - Destroy(obj) does not remove obj from a List<GameObject> for you, and
         // a stale full list will block new spawns even after objects are gone.
 
+
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("activationTrigger")){
+            if (isActive) { isActive = false; }
+            else if (!isActive) { isActive = true; }
+        }
+    }
+
+    void SpawnObject()
+    {
+        GameObject newSpawn = Instantiate(
+            prefabToSpawn, spawnPoint.position, Quaternion.identity
+            );
+        spawnedObjects.Add(newSpawn);
     }
 }
