@@ -3,6 +3,8 @@ using UnityEngine;
 public class Activator : MonoBehaviour
 {
     public bool spawnerActive = false;
+    public int points = 0;
+
 
 
     void OnTriggerEnter(Collider other)
@@ -17,6 +19,11 @@ public class Activator : MonoBehaviour
                 Debug.Log("spawner activated: " + spawnerActive);
             }
         }
+    }
+
+    public void PointsTracker()
+    {
+        Debug.Log("Points collected: " + points);
     }
 
 }

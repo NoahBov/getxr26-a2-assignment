@@ -36,7 +36,6 @@ public class Spawner : MonoBehaviour
     [Tooltip("Hard cap on simultaneous active instances - stop spawning once this is reached.")]
     [SerializeField] private int maxActiveObjects = 10;
 
-    
 
     private float timer = 0f;
 
@@ -55,7 +54,7 @@ public class Spawner : MonoBehaviour
         // it to 0 - resuming should continue counting, not restart the interval).
 
         if (isActive) { timer += Time.deltaTime; }
-        Debug.Log("Time: " + timer);
+
         // TODO: once `timer` reaches `spawnInterval` AND spawnedObjects.Count is
         // below `maxActiveObjects`, instantiate `prefabToSpawn` at a position of
         // your choosing, add the new GameObject to `spawnedObjects`, and reset
@@ -63,7 +62,7 @@ public class Spawner : MonoBehaviour
         // and don't spawn past the capacity limit even if the timer is ready.
         if (timer >= spawnInterval && spawnedObjects.Count < maxActiveObjects && isActive)
         {
-            Debug.Log("time to spawn");
+
             SpawnObject();
             timer = 0;
             
@@ -74,7 +73,10 @@ public class Spawner : MonoBehaviour
         // - Destroy(obj) does not remove obj from a List<GameObject> for you, and
         // a stale full list will block new spawns even after objects are gone.
 
-
+        if (timer >= spawnInterval)
+        {
+            RemoveFromList();
+        }
 
     }
 
@@ -88,4 +90,18 @@ public class Spawner : MonoBehaviour
             );
         spawnedObjects.Add(newSpawn);
     }
+
+    void RemoveFromList()
+    {
+        for (int i = 0; i < spawnedObjects.Count; i++)
+        {
+            GameObject obj = spawnedObjects[i];
+            if (obj == null)
+            {
+                spawnedObjects.Remove(obj);
+            }
+        }
+    }
+
+
 }

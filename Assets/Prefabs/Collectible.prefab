@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Collectible
   scoreValue: 10
+  activator: {fileID: 4668741708223433777, guid: 769635be82469704682d8670b514c51b, type: 3}
 --- !u!1 &6764862567793708197
 GameObject:
   m_ObjectHideFlags: 0

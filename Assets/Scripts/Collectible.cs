@@ -10,11 +10,23 @@ public class Collectible : MonoBehaviour
     [Header("Collision Settings")]
     [Tooltip("Whatever this is worth toward your game state - score, health, etc.")]
     [SerializeField] private int scoreValue = 10;
+    [SerializeField] GameObject activator;
+
+    private void Start()
+    {
+        Destroy(this.gameObject, 60);
+    }
 
     void OnTriggerEnter(Collider other)
     {
         // TODO: check whether `other` belongs to the Player
         // (e.g. other.CompareTag("Player")).
+        if (other.gameObject.CompareTag("Player"))
+        {
+            activator.GetComponent<Activator>().points += scoreValue;
+            activator.GetComponent<Activator>().PointsTracker();
+            Destroy(this.gameObject);
+        }
 
         // TODO: apply your game-state change here using `scoreValue` - a static
         // field, a simple manager script, whatever you like. No UI/HUD is required
