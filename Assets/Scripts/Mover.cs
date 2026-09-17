@@ -56,4 +56,11 @@ public class Mover : MonoBehaviour
 
         transform.Translate(movement * moveSpeed * Time.deltaTime, Space.World);
     }
+
+
+
+
+
+
+
 }

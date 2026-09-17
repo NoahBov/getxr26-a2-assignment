@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -9,12 +10,14 @@ public class Collectible : MonoBehaviour
 {
     [Header("Collision Settings")]
     [Tooltip("Whatever this is worth toward your game state - score, health, etc.")]
-    [SerializeField] private int scoreValue = 10;
-    [SerializeField] GameObject activator;
+    [SerializeField] public int scoreValue = 10;
+    public bool coinCollected;
+    //[SerializeField] GameObject activator;
 
     private void Start()
     {
         Destroy(this.gameObject, 60);
+        coinCollected = false;
     }
 
     void OnTriggerEnter(Collider other)
@@ -23,8 +26,12 @@ public class Collectible : MonoBehaviour
         // (e.g. other.CompareTag("Player")).
         if (other.gameObject.CompareTag("Player"))
         {
-            activator.GetComponent<Activator>().points += scoreValue;
-            activator.GetComponent<Activator>().PointsTracker();
+            coinCollected = true;
+            
+            
+            //activator.GetComponent<Activator>().points += scoreValue;
+            //activator.GetComponent<Activator>().PointsTracker();
+            //activator.GetComponent<Activator>().SetPointsText();
             Destroy(this.gameObject);
         }
 

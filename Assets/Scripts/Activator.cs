@@ -1,11 +1,29 @@
 using UnityEngine;
+using TMPro;
 
 public class Activator : MonoBehaviour
 {
     public bool spawnerActive = false;
-    public int points = 0;
+    public int points;
+    public TextMeshProUGUI pointsText;
+    [SerializeField] GameObject collectible;
 
+    private void Start()
+    {
+        points = 0;
+        SetPointsText();
+        
+    }
 
+    private void Update()
+    {
+        if (collectible.GetComponent<Collectible>().coinCollected)
+        {
+            points += collectible.GetComponent<Collectible>().scoreValue;
+            SetPointsText();
+            collectible.GetComponent<Collectible>().coinCollected = false;
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -21,9 +39,17 @@ public class Activator : MonoBehaviour
         }
     }
 
+
+    public void SetPointsText()
+    {
+        pointsText.text = "Points collected: " + points.ToString();
+        Debug.Log("text renewed");
+    }
+
     public void PointsTracker()
     {
         Debug.Log("Points collected: " + points);
+        //SetPointsText();
     }
 
 }
