@@ -5,7 +5,6 @@ public class Activator : MonoBehaviour
 {
     public bool spawnerActive;
     public int points;
-    public TextMeshProUGUI pointsText;
     [SerializeField] GameObject collectible;
     private bool coinCollected;
 
@@ -45,7 +44,6 @@ public class Activator : MonoBehaviour
 
     public void SetPointsText()
     {
-        pointsText.text = "Points collected: " + points.ToString();
         Debug.Log("text renewed");
     }
 
