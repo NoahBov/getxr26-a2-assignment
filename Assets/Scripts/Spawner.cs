@@ -19,11 +19,6 @@ public class Spawner : MonoBehaviour
     [Tooltip("Seconds between spawns.")]
     [SerializeField] private float spawnInterval = 2.0f;
 
-    // TODO: add your own field(s) for WHERE new instances appear - a fixed point
-    // relative to this transform, or a random position within some bounds. Your choice.
-    private Vector3 spawnPoint;
-    [SerializeField] GameObject activator;
-
     [Header("Activation")]
     [Tooltip("Whether the Spawner is currently instantiating. Toggle this at runtime " +
              "(key press or trigger switch, your choice) to pause/resume spawning.")]
@@ -36,72 +31,81 @@ public class Spawner : MonoBehaviour
     [Tooltip("Hard cap on simultaneous active instances - stop spawning once this is reached.")]
     [SerializeField] private int maxActiveObjects = 10;
 
-
     private float timer = 0f;
+
+    
+    //for storing where collectible will be spawned
+    private Vector3 spawnPoint;
+    //the object that the player interacts with the start and stop the spawning of collectibles
+    [SerializeField] GameObject activator;
+    //player, for checking range player-collectible
+    [SerializeField] private GameObject player;
+
 
     void Update()
     {
-        // TODO: pick a way to flip `isActive` at runtime - a key press
-        // (e.g. Keyboard.current.spaceKey.wasPressedThisFrame) is the simplest,
-        // but a trigger switch the Player walks into also satisfies this.
-        // Toggling isActive alone doesn't finish the requirement below - the
-        // timer and spawning logic still need to actually respect it.
-
+        //activator object controlls boolean isActive
         isActive = activator.GetComponent<Activator>().spawnerActive;
 
-        // TODO: only accumulate Time.deltaTime into `timer` while `isActive` is
-        // true. When inactive, leave `timer` exactly where it was (don't reset
-        // it to 0 - resuming should continue counting, not restart the interval).
-
+        //timer for checking spawnInterval
         if (isActive) { timer += Time.deltaTime; }
 
-        // TODO: once `timer` reaches `spawnInterval` AND spawnedObjects.Count is
-        // below `maxActiveObjects`, instantiate `prefabToSpawn` at a position of
-        // your choosing, add the new GameObject to `spawnedObjects`, and reset
-        // `timer` back to 0. Don't call Instantiate() unconditionally every frame,
-        // and don't spawn past the capacity limit even if the timer is ready.
+        //if spawning is active, enough time has passed, and the list is not full
         if (timer >= spawnInterval && spawnedObjects.Count < maxActiveObjects && isActive)
         {
 
-            SpawnObject();
-            timer = 0;
-            
+            SpawnObject();  //spawns a new collectible
+            OutOfRange();   //checks the distance between collectible and player
+            timer = 0;      //reset timer
+
         }
 
-
-        // TODO: periodically remove destroyed (null) entries from `spawnedObjects`
-        // - Destroy(obj) does not remove obj from a List<GameObject> for you, and
-        // a stale full list will block new spawns even after objects are gone.
-
+        //occasionally check for null objects in list
         if (timer >= spawnInterval)
         {
             RemoveFromList();
         }
-
     }
 
     void SpawnObject()
     {
+        //get a random position within a circle with radius 5
         Vector2 randomRadius = Random.insideUnitCircle * 5;
+        //set the point where collectible should spawn to a location within radius 5 of the spawner 
         spawnPoint = transform.position + new Vector3(randomRadius.x, 0, randomRadius.y);
 
+        //create a new instance of the prefab at the spawnPoint, add it to the list of created objects
         GameObject newSpawn = Instantiate(
             prefabToSpawn, spawnPoint, Quaternion.identity
             );
         spawnedObjects.Add(newSpawn);
     }
 
+
+    //Go through list of created objects, if it was destroyed, remove it from the list
     void RemoveFromList()
     {
-        for (int i = 0; i < spawnedObjects.Count; i++)
+        for (int i = spawnedObjects.Count - 1; i >= 0; i--)
         {
-            GameObject obj = spawnedObjects[i];
-            if (obj == null)
-            {
-                spawnedObjects.Remove(obj);
-            }
+            if (spawnedObjects[i] == null) spawnedObjects.RemoveAt(i);
         }
     }
 
+    //Go through list of created objects
+    //if the object was not destroyed, check the distance between player and object
+    //if the object is more than 10 away from the player, destroy it
+    void OutOfRange()
+    {
+        for (int i = 0; i < spawnedObjects.Count; i++)
+        {
+            if (spawnedObjects[i] != null) {
 
+                float dist = Vector3.Distance(player.transform.position, spawnedObjects[i].transform.position);
+                if (dist > 10)
+                {
+                    Destroy(spawnedObjects[i]);
+                }
+            }
+        }
+    }
 }

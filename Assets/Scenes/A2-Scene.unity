@@ -1037,10 +1037,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Spawner
   prefabToSpawn: {fileID: 100000, guid: 1e1c57379115a2a45ca1cbf64e765da4, type: 3}
   spawnInterval: 2
-  activator: {fileID: 1143769083}
   isActive: 0
   spawnedObjects: []
   maxActiveObjects: 10
+  activator: {fileID: 1143769083}
+  player: {fileID: 2134384181}
 --- !u!1001 &8387980119547154117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1051,7 +1052,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 610252426828163635, guid: 769635be82469704682d8670b514c51b, type: 3}
       propertyPath: points
-      value: 0
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 610252426828163635, guid: 769635be82469704682d8670b514c51b, type: 3}
       propertyPath: newPoints

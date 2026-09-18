@@ -128,3 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   spawnerActive: 0
+  points: 60
+  pointsText: {fileID: 0}
+  collectible: {fileID: 100000, guid: 1e1c57379115a2a45ca1cbf64e765da4, type: 3}

@@ -3,13 +3,16 @@ using TMPro;
 
 public class Activator : MonoBehaviour
 {
-    public bool spawnerActive = false;
+    public bool spawnerActive;
     public int points;
     public TextMeshProUGUI pointsText;
     [SerializeField] GameObject collectible;
+    private bool coinCollected;
 
     private void Start()
     {
+        spawnerActive = false;
+        coinCollected = false;
         points = 0;
         SetPointsText();
         
@@ -17,11 +20,11 @@ public class Activator : MonoBehaviour
 
     private void Update()
     {
-        if (collectible.GetComponent<Collectible>().coinCollected)
+        if (coinCollected)
         {
-            points += collectible.GetComponent<Collectible>().scoreValue;
             SetPointsText();
-            collectible.GetComponent<Collectible>().coinCollected = false;
+            Debug.Log("Points collected: " + points);
+            coinCollected = false;
         }
     }
 
@@ -48,8 +51,10 @@ public class Activator : MonoBehaviour
 
     public void PointsTracker()
     {
+        points += collectible.GetComponent<Collectible>().scoreValue;
         Debug.Log("Points collected: " + points);
-        //SetPointsText();
+        SetPointsText();
+        coinCollected = true;
     }
 
 }
