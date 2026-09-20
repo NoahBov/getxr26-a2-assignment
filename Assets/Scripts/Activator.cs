@@ -3,38 +3,21 @@ using TMPro;
 
 public class Activator : MonoBehaviour
 {
-    public bool spawnerActive;
-    [SerializeField] int points;
-    private bool coinCollected;
+    public bool spawnerActive; //for spawner to start and stop spawning
+    public int points;  //to keep track of points collected from collectibles
 
     private void Start()
     {
-        spawnerActive = false;
-        coinCollected = false;
+        spawnerActive = false; //spawner does not spawn until player triggers activator
         points = 0;
-
-        Debug.Log("Activation " + points);
-
-
     }
 
-    private void Update()
-    {
-        Debug.Log("Points " + points);
-
-        if (coinCollected)
-        {
-
-            Debug.Log("Points collected: " + points);
-            coinCollected = false;
-        }
-    }
-
+    
+    //Checks if player has triggered the activator, triggering switches spawnerActive state, which the spawner uses 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("player detected");
             if (spawnerActive) { spawnerActive = false;
                 Debug.Log("spawner deactivated: " + !spawnerActive);
             }
@@ -45,13 +28,10 @@ public class Activator : MonoBehaviour
     }
 
 
-  
+  //Gets called by collectible when player collects
     public void PointsTracker()
     {
-        points += 10;
-        Debug.Log("PointsTracker: " + points);
-   
-        coinCollected = true;
+        Debug.Log("Points collected: " + points);
     }
 
 }

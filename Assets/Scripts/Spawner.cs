@@ -53,18 +53,15 @@ public class Spawner : MonoBehaviour
         //if spawning is active, enough time has passed, and the list is not full
         if (timer >= spawnInterval && spawnedObjects.Count < maxActiveObjects && isActive)
         {
-
             SpawnObject();  //spawns a new collectible
-            OutOfRange();   //checks the distance between collectible and player
             timer = 0;      //reset timer
-
         }
+
+        OutOfRange();   //checks the distance between collectible and player
 
         //occasionally check for null objects in list
-        if (timer >= spawnInterval)
-        {
-            RemoveFromList();
-        }
+        RemoveFromList();
+
     }
 
     void SpawnObject()
@@ -76,13 +73,13 @@ public class Spawner : MonoBehaviour
 
         //create a new instance of the prefab at the spawnPoint, add it to the list of created objects
         GameObject newSpawn = Instantiate(
-            prefabToSpawn, spawnPoint, Quaternion.identity
+            prefabToSpawn, spawnPoint, Quaternion.Euler(0, Random.Range(-90, 90), 0)
             );
         spawnedObjects.Add(newSpawn);
     }
 
 
-    //Go through list of created objects, if it was destroyed, remove it from the list
+    //Goes through list of created objects, if object was destroyed, removes it from the list
     void RemoveFromList()
     {
         for (int i = spawnedObjects.Count - 1; i >= 0; i--)
@@ -91,9 +88,10 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    //Go through list of created objects
-    //if the object was not destroyed, check the distance between player and object
-    //if the object is more than 10 away from the player, destroy it
+
+    //Goes through list of created objects
+    //checks the distance between player and object if the object was not destroyed already
+    //destroys the object if it is more than 10 away from the player
     void OutOfRange()
     {
         for (int i = 0; i < spawnedObjects.Count; i++)

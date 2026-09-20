@@ -557,7 +557,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -714,10 +714,6 @@ PrefabInstance:
     - target: {fileID: 4668741708223433777, guid: 769635be82469704682d8670b514c51b, type: 3}
       propertyPath: m_Name
       value: SceneActivator
-      objectReference: {fileID: 0}
-    - target: {fileID: 4668741708223433777, guid: 769635be82469704682d8670b514c51b, type: 3}
-      propertyPath: m_TagString
-      value: Activator
       objectReference: {fileID: 0}
     - target: {fileID: 5679681083073706851, guid: 769635be82469704682d8670b514c51b, type: 3}
       propertyPath: m_LocalPosition.x
