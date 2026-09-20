@@ -398,11 +398,17 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1 &1143769083 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4668741708223433777, guid: 769635be82469704682d8670b514c51b, type: 3}
+--- !u!114 &1143769085 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 610252426828163635, guid: 769635be82469704682d8670b514c51b, type: 3}
   m_PrefabInstance: {fileID: 8387980119547154117}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 261c4a7333e9b6f4a9778ebff7f996d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Activator
 --- !u!1 &1355933627
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,7 +701,7 @@ MonoBehaviour:
   isActive: 0
   spawnedObjects: []
   maxActiveObjects: 10
-  activator: {fileID: 1143769083}
+  activator: {fileID: 1143769085}
   player: {fileID: 2134384181}
 --- !u!1001 &8387980119547154117
 PrefabInstance:
@@ -705,12 +711,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 610252426828163635, guid: 769635be82469704682d8670b514c51b, type: 3}
-      propertyPath: pointsText
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4668741708223433777, guid: 769635be82469704682d8670b514c51b, type: 3}
       propertyPath: m_Name
+      value: SceneActivator
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668741708223433777, guid: 769635be82469704682d8670b514c51b, type: 3}
+      propertyPath: m_TagString
       value: Activator
       objectReference: {fileID: 0}
     - target: {fileID: 5679681083073706851, guid: 769635be82469704682d8670b514c51b, type: 3}

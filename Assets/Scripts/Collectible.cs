@@ -11,7 +11,7 @@ public class Collectible : MonoBehaviour
     [Header("Collision Settings")]
     [Tooltip("Whatever this is worth toward your game state - score, health, etc.")]
     [SerializeField] public int scoreValue = 10;
-    [SerializeField] GameObject activator;
+    [SerializeField] Activator activator;
 
     private void Start()
     {
@@ -24,7 +24,7 @@ public class Collectible : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             //activator.GetComponent<Activator>().points += scoreValue;
-            activator.GetComponent<Activator>().PointsTracker();
+            other.GetComponent<Activator>().PointsTracker();
             Destroy(this.gameObject);
         }
     }

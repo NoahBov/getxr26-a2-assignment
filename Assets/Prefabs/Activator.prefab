@@ -129,8 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Activator
   spawnerActive: 0
-  points: 66
-  pointsText: {fileID: 0}
+  points: 0
   collectible: {fileID: 100000, guid: 1e1c57379115a2a45ca1cbf64e765da4, type: 3}
 --- !u!54 &6346900253617724305
 Rigidbody:

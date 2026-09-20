@@ -4,8 +4,7 @@ using TMPro;
 public class Activator : MonoBehaviour
 {
     public bool spawnerActive;
-    public int points;
-    [SerializeField] GameObject collectible;
+    [SerializeField] int points;
     private bool coinCollected;
 
     private void Start()
@@ -13,15 +12,19 @@ public class Activator : MonoBehaviour
         spawnerActive = false;
         coinCollected = false;
         points = 0;
-        SetPointsText();
-        
+
+        Debug.Log("Activation " + points);
+
+
     }
 
     private void Update()
     {
+        Debug.Log("Points " + points);
+
         if (coinCollected)
         {
-            SetPointsText();
+
             Debug.Log("Points collected: " + points);
             coinCollected = false;
         }
@@ -42,16 +45,12 @@ public class Activator : MonoBehaviour
     }
 
 
-    public void SetPointsText()
-    {
-        Debug.Log("text renewed");
-    }
-
+  
     public void PointsTracker()
     {
-        points += collectible.GetComponent<Collectible>().scoreValue;
-        Debug.Log("Points collected: " + points);
-        SetPointsText();
+        points += 10;
+        Debug.Log("PointsTracker: " + points);
+   
         coinCollected = true;
     }
 

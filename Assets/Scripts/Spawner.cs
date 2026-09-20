@@ -37,7 +37,7 @@ public class Spawner : MonoBehaviour
     //for storing where collectible will be spawned
     private Vector3 spawnPoint;
     //the object that the player interacts with the start and stop the spawning of collectibles
-    [SerializeField] GameObject activator;
+    [SerializeField] Activator activator;
     //player, for checking range player-collectible
     [SerializeField] private GameObject player;
 
@@ -45,7 +45,7 @@ public class Spawner : MonoBehaviour
     void Update()
     {
         //activator object controlls boolean isActive
-        isActive = activator.GetComponent<Activator>().spawnerActive;
+        isActive = activator.spawnerActive;
 
         //timer for checking spawnInterval
         if (isActive) { timer += Time.deltaTime; }
